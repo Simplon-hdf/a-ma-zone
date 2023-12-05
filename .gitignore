@@ -4,6 +4,7 @@
 /prisma
 .env
 
+
 # Logs
 logs
 *.log
