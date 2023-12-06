@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Users {
-  UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36)
   user_pseudo    String     @unique() @db.VarChar(50)
   username       String     @unique() @db.VarChar(75)
   user_password  String     @unique() @db.VarChar(75)
