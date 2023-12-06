@@ -10,42 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-<<<<<<< HEAD
 model Products {
   product_UUID        String @id(map: "products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
-  product_name        String @db.VarChar(50)
-  product_description String @db.Text()
-  product_price       Int
+  product_name        String @db.VarChar(20)
+  product_description String @db.VarChar(500)
+  product_price       Float
   product_quantity    Int
   created_at          DateTime
   updated_at          DateTime
-  authorUUID  String @db.VarChar(36) // Ref to UUIDv4
-  Author      Users  @relation(map: "product_author", fields: [authorUUID], references: [UUID])
 }
 
-
-quantite_produit    Int
-  cree_le             DateTime
-  mis_a_jour_le       DateTime?
-
-
-CREATE TABLE IF NOT EXISTS products (
-     product_UUID SERIAL PRIMARY KEY NOT NULL,
-     product_name VARCHAR(100),
-     product_description TEXT,
-     product_price DECIMAL(10, 2) CHECK (product_price >= 0),
-     product_quantity INT CHECK (product_quantity >= 0),
-     created_at DATE NOT NULL,
-     updated_at DATE,
-     CONSTRAINT chk_dates CHECK (created_at < updated_at)
-);
-=======
 model Users {
   UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
-  user_pseudo    String     @unique() @db.VarChar(50)
-  username       String     @unique() @db.VarChar(75)
-  user_password  String     @unique() @db.VarChar(75)
-  created_at     DateTime @default(now()) @map("created_at") 
+  user_pseudo    String     @unique() @db.VarChar(20)
+  username       String     @unique() @db.VarChar(30)
+  user_password  String     @unique() @db.VarChar(72) // Revoir la taille min et max
+  created_at     DateTime   @default(now()) @map("created_at") 
   orders         Orders[]
 }
 
@@ -58,4 +38,3 @@ model Orders {
   User_UUID String  @db.VarChar(36)
   user Users @relation(map: "order_test", fields: [User_UUID], references: [UUID])
 }
->>>>>>> 00e074084e8f2fd36eb26ff320bd2f34f3da8899
