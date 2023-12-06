@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+<<<<<<< HEAD
 model Products {
   product_UUID        String @id(map: "products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
   product_name        String @db.VarChar(50)
@@ -38,3 +39,23 @@ CREATE TABLE IF NOT EXISTS products (
      updated_at DATE,
      CONSTRAINT chk_dates CHECK (created_at < updated_at)
 );
+=======
+model Users {
+  UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  user_pseudo    String     @unique() @db.VarChar(50)
+  username       String     @unique() @db.VarChar(75)
+  user_password  String     @unique() @db.VarChar(75)
+  created_at     DateTime @default(now()) @map("created_at") 
+  orders         Orders[]
+}
+
+model Orders {
+  order_number String @id(map: "orders_order_number") @unique @default(uuid()) @db.VarChar(36)
+  order_total_cost_ht Int
+  order_total_quantity Int
+  created_at DateTime @default(now())
+  delivrer_at DateTime @default(now())
+  User_UUID String  @db.VarChar(36)
+  user Users @relation(map: "order_test", fields: [User_UUID], references: [UUID])
+}
+>>>>>>> 00e074084e8f2fd36eb26ff320bd2f34f3da8899
