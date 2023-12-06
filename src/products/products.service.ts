@@ -23,13 +23,6 @@ export class ProductsService {
           product_quantity: createProductDto.quantity,
           created_at: createProductDto.created_at,
           updated_at: createProductDto.updated_at,
-          
-          // Author: {
-          //   connect: {
-          //     UUID: createProductDto.owner_uuid,
-          //   },
-          // },
-
         },
       }),
     ).toJSON();
