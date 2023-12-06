@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Products {
-  product_UUID        String @id(map: "products_products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  product_UUID        String @id(map: "products_product_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
   product_name String @db.VarChar(20)
   product_description String @db.VarChar(500)
   product_price Float
   product_quantity Int
   created_at DateTime
   updated_at DateTime
-  belongs Belong[]
+  orders Belong[]
 }
 
 model Users {
@@ -38,11 +38,13 @@ model Orders {
   delivrer_at DateTime @default(now())
   User_UUID String @db.VarChar(36)
   user Users @relation(fields: [User_UUID], references: [UUID])
+  products Belong[]
 }
 
 model Belong {
   product_UUID String
   order_number String
   product Products @relation(fields: [product_UUID], references: [product_UUID])
+  order   Orders   @relation(fields: [order_number], references: [order_number])
   @@id([product_UUID, order_number]) // Clé composite pour le modèle Belong
 }
