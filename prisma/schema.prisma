@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Products {
+  product_UUID        String @id(map: "products_products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  product_name String @db.VarChar(20)
+  product_description String @db.VarChar(500)
+  product_price Float
+  product_quantity Int
+  created_at DateTime
+  updated_at DateTime
+  orders Belong[]
+}
+
+model Users {
+  UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  user_pseudo    String     @unique() @db.VarChar(20)
+  username       String     @unique() @db.VarChar(30)
+  user_password  String     @unique() @db.VarChar(72) // Revoir la taille min et max
+  created_at     DateTime   @default(now()) @map("created_at") 
+  orders         Orders[]
+}
+
+model Orders {
+  order_number String @id(map: "orders_order_number") @unique @default(uuid()) @db.VarChar(36)
+  order_total_cost_ht Int
+  order_total_quantity Int
+  created_at DateTime @default(now())
+  delivrer_at DateTime @default(now())
+  User_UUID String @db.VarChar(36)
+  user Users @relation(fields: [User_UUID], references: [UUID])
+  products Belong[]
+}
+
+model Belong {
+  product_UUID String
+  order_number String
+  product Products @relation(fields: [product_UUID], references: [product_UUID])
+  order   Orders   @relation(fields: [order_number], references: [order_number])
+  @@id([product_UUID, order_number]) // Clé composite pour le modèle Belong
+}
