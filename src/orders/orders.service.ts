@@ -1,26 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class OrdersService {
-  create(createOrderDto: CreateOrderDto) {
-    return 'This action adds a new order';
+  constructor(private readonly prisma: PrismaService) {}
+
+  public async create(createOrderDto: CreateOrderDto) {
+    const createdOrder = await this.prisma.orders.create({
+      data: createOrderDto,
+    });
+    return createdOrder;
   }
 
-  findAll() {
-    return `This action returns all orders`;
+  public async getByUUID(uuid: string) {
+    const getOrder = await this.prisma.orders.findUnique({
+      where: {
+        order_number: uuid,
+      },
+    });
+    return getOrder;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  public async updateByUUID(uuid: string, updateOrderDto: UpdateOrderDto) {
+    const updatedOrder = await this.prisma.orders.update({
+      where: {
+        order_number: uuid,
+      },
+      data: updateOrderDto,
+    });
+    return updatedOrder;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+  public async deleteByUUID(uuid: string) {
+    const deletedOrder = await this.prisma.orders.delete({
+      where: {
+        order_number: uuid,
+      },
+    });
+    return deletedOrder;
   }
 }
