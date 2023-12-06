@@ -1098,7 +1098,11 @@ packages:
     resolution: {integrity: sha512-Mt2q+GNJpU2vFn6kif24oRSBQv1KOkYaterQsi0k2/lA+dLvhRX6Lm26gon6PYHwUM8/h8KRgXIUMU0PCLB6bw==}
     requiresBuild: true
     dev: true
+<<<<<<< HEAD
+>>>>>>> 09fc7735590c0b616315ebaeaf8d6859b619219e
+=======
 >>>>>>> 0c25b3f232c96e4d170198a7935bed2967305919
+>>>>>>> 00e074084e8f2fd36eb26ff320bd2f34f3da8899
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
@@ -4366,7 +4370,11 @@ packages:
 <<<<<<< HEAD
 =======
     dev: true
+<<<<<<< HEAD
+>>>>>>> 09fc7735590c0b616315ebaeaf8d6859b619219e
+=======
 >>>>>>> 0c25b3f232c96e4d170198a7935bed2967305919
+>>>>>>> 00e074084e8f2fd36eb26ff320bd2f34f3da8899
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

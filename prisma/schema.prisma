@@ -10,12 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Products {
+  product_UUID        String @id(map: "products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  product_name        String @db.VarChar(20)
+  product_description String @db.VarChar(500)
+  product_price       Float
+  product_quantity    Int
+  created_at          DateTime
+  updated_at          DateTime
+}
+
 model Users {
   UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
-  user_pseudo    String     @unique() @db.VarChar(50)
-  username       String     @unique() @db.VarChar(75)
-  user_password  String     @unique() @db.VarChar(75)
-  created_at     DateTime @default(now()) @map("created_at") 
+  user_pseudo    String     @unique() @db.VarChar(20)
+  username       String     @unique() @db.VarChar(30)
+  user_password  String     @unique() @db.VarChar(72) // Revoir la taille min et max
+  created_at     DateTime   @default(now()) @map("created_at") 
   orders         Orders[]
 }
 
