@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsString, IsUUID, Length, Min } from 'class-validator';
+import { IsInt, IsString, Length, Min } from 'class-validator';
 
 export class CreateProductDto {
   @ApiProperty({
@@ -51,13 +51,4 @@ export class CreateProductDto {
   @IsInt()
   @Min(1)
   public updated_at: string;
-
-//   @ApiProperty({
-//     description: 'This field has to be a User UUID',
-//     minLength: 36,
-//     maxLength: 36,
-//   })
-//   @IsUUID('4')
-//   @Length(36, 36)
-//   public owner_uuid: string;
 }

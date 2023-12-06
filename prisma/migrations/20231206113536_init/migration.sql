@@ -8,7 +8,7 @@ CREATE TABLE "Products" (
     "created_at" TIMESTAMP(3) NOT NULL,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "products_products_uuid" PRIMARY KEY ("product_UUID")
+    CONSTRAINT "products_product_uuid" PRIMARY KEY ("product_UUID")
 );
 
 -- CreateTable
