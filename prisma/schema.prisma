@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Products {
-  product_UUID        String @id(map: "products_products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  product_UUID        String @id(map: "products_product_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
   product_name String @db.VarChar(20)
   product_description String @db.VarChar(500)
   product_price Float
