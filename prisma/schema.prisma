@@ -10,12 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Products {
+  product_UUID        String @id(map: "products_product_uuid") @unique() @default(uuid()) @db.VarChar(36)
+  product_name String @db.VarChar(20)
+  product_description String @db.VarChar(500)
+  product_price Float
+  product_quantity Int
+  created_at DateTime
+  updated_at DateTime
+  orders Belong[]
+}
+
 model Users {
-  UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
-  user_pseudo    String     @unique() @db.VarChar(50)
-  username       String     @unique() @db.VarChar(75)
-  user_password  String     @unique() @db.VarChar(75)
-  created_at DateTime @default(now()) @map("created_at") 
+  UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36)
+  user_pseudo    String     @unique() @db.VarChar(20)
+  username       String     @unique() @db.VarChar(30)
+  user_password  String     @unique() @db.VarChar(72)
+  created_at     DateTime   @default(now()) @map("created_at") 
+  orders         Orders[]
 }
 
 model Orders {
@@ -24,6 +36,15 @@ model Orders {
   order_total_quantity Int
   created_at DateTime @default(now())
   delivrer_at DateTime @default(now())
-  User_UUID String  @db.VarChar(36)
-  user Users @relation(map: "order_uuid", fields: [User_UUID], references: [UUID])
+  User_UUID String @db.VarChar(36)
+  user Users @relation(fields: [User_UUID], references: [UUID])
+  products Belong[]
+}
+
+model Belong {
+  product_UUID String
+  order_number String
+  product Products @relation(fields: [product_UUID], references: [product_UUID])
+  order   Orders   @relation(fields: [order_number], references: [order_number])
+  @@id([product_UUID, order_number])
 }
