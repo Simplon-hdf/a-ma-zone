@@ -50,9 +50,7 @@ export class OrdersService {
           order_number: updateOrderDto.order_number,
           order_total_cost_ht: updateOrderDto.order_total_cost_ht,
           order_total_quantity: updateOrderDto.order_total_quantity,
-          created_at: updateOrderDto.created_at,
           delivrer_at: updateOrderDto.delirer_at,
-          User_UUID: updateOrderDto.User_UUID as string
         }
       })
     ).toJSON();

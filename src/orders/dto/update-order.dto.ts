@@ -9,7 +9,5 @@ export class UpdateOrderDto extends CreateOrderDto {
     @IsOptional()
     public order_total_quantity: number;
     @IsOptional()
-    public created_at: Date;
-    @IsOptional()
     public delivrer_at: Date;
 }
