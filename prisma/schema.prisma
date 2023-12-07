@@ -22,7 +22,7 @@ model Products {
 }
 
 model Users {
-  UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36)
+  user_UUID           String     @id(map: "users_user_uuid") @unique() @default(uuid()) @db.VarChar(36)
   user_pseudo    String     @unique() @db.VarChar(20)
   username       String     @unique() @db.VarChar(30)
   user_password  String     @unique() @db.VarChar(72)
@@ -37,7 +37,7 @@ model Orders {
   created_at DateTime @default(now())
   delivrer_at DateTime @default(now())
   User_UUID String @db.VarChar(36)
-  user Users @relation(fields: [User_UUID], references: [UUID])
+  user Users @relation(fields: [User_UUID], references: [user_UUID])
   products Belong[]
 }
 
