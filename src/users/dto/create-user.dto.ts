@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, IsDate, Length } from 'class-validator';
+import { IsEmail, IsString, IsDate, Length, IsDateString } from 'class-validator';
 
 export class CreateUserDto {
   @ApiProperty({
@@ -14,24 +14,24 @@ export class CreateUserDto {
   @ApiProperty({
     description: 'This field represents the new user username',
     minLength: 5,
-    maxLength: 30,
+    maxLength: 20,
   })
   @IsString()
-  @Length(5, 30)
+  @Length(5, 20)
   username: string;
 
   @ApiProperty({
     description: 'This field represents the new user password',
-    minLength: 72,
+    minLength: 1,
     maxLength: 72,
   })
   @IsString()
-  @Length(72, 72)
+  @Length(5, 72)
   password: string;
 
   @ApiProperty({
     description: 'This field represents the new user created_at',
   })
-  @IsDate()
+  @IsDateString()
   created_at : Date;
 }
