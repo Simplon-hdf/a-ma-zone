@@ -9,7 +9,7 @@ import { ProductsService } from 'src/products/products.service';
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
-    private readonly productsService: ProductsService,
+   /*  private readonly productsService: ProductsService, */
   ) {}
 
   @Post()

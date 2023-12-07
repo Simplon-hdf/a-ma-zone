@@ -20,6 +20,11 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto);
   }
 
+  @Get()
+  public findAll() {
+    return this.ordersService.findAll();
+  }
+
   @Get(':uuid')
   public getByUUID(
     @Param('uuid')
