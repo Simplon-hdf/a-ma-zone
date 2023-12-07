@@ -24,7 +24,6 @@ export class OrdersService {
     ).toJSON();
   }
 
-  
   findAll() {
     return `This action returns all users`;
   }
