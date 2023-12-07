@@ -111,5 +111,4 @@ export class ProductsService {
   //       },
   //     }),
   //   ).toJSON();
-  // }
 }
