@@ -40,20 +40,20 @@ export class UsersService {
   }
 
   public async updateByUUID(uuid: string, updateUserDto: UpdateUserDto) {
-    const updatedUser = new NormalizedResponse(
+    return new NormalizedResponse(
       `User ${updateUserDto.pseudo} has been updated`,
       await this.prisma.users.update({
         where: {
           user_UUID: uuid,
         },
         data: {
-          user_pseudo: !!updateUserDto.pseudo ? updateUserDto.pseudo : undefined,
-          username: !!updateUserDto.username ? updateUserDto.username : undefined,
-          user_password: !!updateUserDto.password ? updateUserDto.password : undefined,
-        },
-      }),
-    );
-    return updatedUser.toJSON();
+          user_pseudo: updateUserDto.user_pseudo,
+          username: updateUserDto.username,
+          user_password: updateUserDto.user_password,
+          created_at: updateUserDto.created_at,
+        }
+      })
+    ).toJSON();
   }
 
   public async deleteByUUID(uuid: string) {
