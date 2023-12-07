@@ -16,7 +16,7 @@ export class CreateOrderDto {
     maxLength: 20
   })
   @IsInt()
-  @Length(1, 10)
+  @Length(1, 20)
   public order_total_cost_ht: number;
 
   @ApiProperty({
