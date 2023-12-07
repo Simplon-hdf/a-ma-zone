@@ -32,7 +32,7 @@ export class UsersService {
       `User ${uuid} has been found`,
       await this.prisma.users.findUnique({
         where: {
-          UUID: uuid,
+          user_UUID: uuid,
         },
       }),
     );
@@ -44,7 +44,7 @@ export class UsersService {
       `User ${updateUserDto.pseudo} has been updated`,
       await this.prisma.users.update({
         where: {
-          UUID: uuid,
+          user_UUID: uuid,
         },
         data: {
           user_pseudo: !!updateUserDto.pseudo ? updateUserDto.pseudo : undefined,
@@ -61,7 +61,7 @@ export class UsersService {
       `User ${uuid} has been deleted`,
       await this.prisma.users.delete({
         where: {
-          UUID: uuid,
+          user_UUID: uuid,
         },
       }),
     );
