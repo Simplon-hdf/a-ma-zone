@@ -10,8 +10,4 @@ export class UpdateProductDto extends CreateProductDto {
   public price: number;
   @IsOptional()
   public quantity: number;
-  @IsOptional()
-  public created_at: Date;
-  @IsOptional()
-  public updated_at: Date;
 }

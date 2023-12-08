@@ -3,11 +3,9 @@ import { CreateOrderDto } from './create-order.dto';
 
 export class UpdateOrderDto extends CreateOrderDto {
     @IsOptional()
-    public order_number: string;
+    public order_number: number;
     @IsOptional()
     public order_total_cost_ht: number;
     @IsOptional()
     public order_total_quantity: number;
-    @IsOptional()
-    public delivrer_at: Date;
 }
