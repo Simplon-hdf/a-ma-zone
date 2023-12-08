@@ -16,9 +16,7 @@ export class OrdersService {
           order_number: createOrderDto.order_number,
           order_total_cost_ht: createOrderDto.order_total_cost_ht,
           order_total_quantity: createOrderDto.order_total_quantity,
-          created_at: createOrderDto.created_at,
-          delivrer_at: createOrderDto.delirer_at,
-          User_UUID: createOrderDto.User_UUID as string
+          user_UUID : createOrderDto.user_UUID,
         }
       })
     ).toJSON();
@@ -28,7 +26,7 @@ export class OrdersService {
     return `This action returns all users`;
   }
 
-  public async getByUUID(uuid: string) {
+  public async getByUUID(uuid: number) {
     return new NormalizedResponse(
       `Product for '${uuid}' uuid has been found`,
       await this.prisma.orders.findUnique({
@@ -39,7 +37,7 @@ export class OrdersService {
     ).toJSON();
   }
 
-  public async updateByUUID(uuid: string, updateOrderDto: UpdateOrderDto) {
+  public async updateByUUID(uuid: number, updateOrderDto: UpdateOrderDto) {
     return new NormalizedResponse(
       `Order for '${uuid}' uuid has been updated`,
       await this.prisma.orders.update({
@@ -50,13 +48,12 @@ export class OrdersService {
           order_number: updateOrderDto.order_number,
           order_total_cost_ht: updateOrderDto.order_total_cost_ht,
           order_total_quantity: updateOrderDto.order_total_quantity,
-          delivrer_at: updateOrderDto.delirer_at,
         }
       })
     ).toJSON();
   }
 
-  public async deleteByUUID(uuid: string) {
+  public async deleteByUUID(uuid: number) {
     return new NormalizedResponse(
       `Orders for '${uuid} has been deleted'`,
       await this.prisma.orders.delete({
@@ -67,5 +64,3 @@ export class OrdersService {
     ).toJSON();
   }
 }
-
-
