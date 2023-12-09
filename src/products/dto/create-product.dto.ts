@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsString, Length, Min } from 'class-validator';
+import { IsInt, IsString, Length } from 'class-validator';
 
 export class CreateProductDto {
   @ApiProperty({
@@ -9,7 +9,7 @@ export class CreateProductDto {
   })
   @IsString()
   @Length(5, 50)
-  public name: string;
+  public product_name: string;
 
   @ApiProperty({
     description: 'This field represents product description',
@@ -17,38 +17,18 @@ export class CreateProductDto {
     maxLength: 500,
   })
   @IsString()
-  @Length(1, 1000)
-  public description: string;
+  @Length(1, 500)
+  public product_description: string;
 
   @ApiProperty({
     description: 'This field represents product price',
-    minimum: 1,
   })
   @IsInt()
-  @Min(1)
-  public price: number;
+  public product_price: number;
 
   @ApiProperty({
     description: 'This field represents product quantity',
-    minimum: 1,
   })
   @IsInt()
-  @Min(1)
-  public quantity: number;
-
-  @ApiProperty({
-    description: 'This field represents product created_at',
-    minimum: 1,
-  })
-  @IsInt()
-  @Min(1)
-  public created_at: string;
-
-  @ApiProperty({
-    description: 'This field represents product updated_at',
-    minimum: 1,
-  })
-  @IsInt()
-  @Min(1)
-  public updated_at: string;
+  public product_quantity: number;
 }

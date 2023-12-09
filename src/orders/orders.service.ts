@@ -16,38 +16,51 @@ export class OrdersService {
           order_number: createOrderDto.order_number,
           order_total_cost_ht: createOrderDto.order_total_cost_ht,
           order_total_quantity: createOrderDto.order_total_quantity,
-          order_created_at: createOrderDto.order_created_at,
-          order_delivrer_at: createOrderDto.order_delivrer_at,
+          user_UUID: createOrderDto.user_UUID,
         },
       }),
     ).toJSON();
   }
 
-  public async getByUUID(uuid: string) {
-    const getOrder = await this.prisma.orders.findUnique({
-      where: {
-        order_number: uuid,
-      },
-    });
-    return getOrder;
+  findAll() {
+    return `This action returns all users`;
   }
 
-  public async updateByUUID(uuid: string, updateOrderDto: UpdateOrderDto) {
-    const updatedOrder = await this.prisma.orders.update({
-      where: {
-        order_number: uuid,
-      },
-      data: updateOrderDto,
-    });
-    return updatedOrder;
+  public async getByUUID(uuid: number) {
+    return new NormalizedResponse(
+      `Product for '${uuid}' uuid has been found`,
+      await this.prisma.orders.findUnique({
+        where: {
+          order_number: uuid,
+        },
+      }),
+    ).toJSON();
   }
 
-  public async deleteByUUID(uuid: string) {
-    const deletedOrder = await this.prisma.orders.delete({
-      where: {
-        order_number: uuid,
-      },
-    });
-    return deletedOrder;
+  public async updateByUUID(uuid: number, updateOrderDto: UpdateOrderDto) {
+    return new NormalizedResponse(
+      `Order for '${uuid}' uuid has been updated`,
+      await this.prisma.orders.update({
+        where: {
+          order_number: uuid,
+        },
+        data: {
+          order_number: updateOrderDto.order_number,
+          order_total_cost_ht: updateOrderDto.order_total_cost_ht,
+          order_total_quantity: updateOrderDto.order_total_quantity,
+        },
+      }),
+    ).toJSON();
+  }
+
+  public async deleteByUUID(uuid: number) {
+    return new NormalizedResponse(
+      `Orders for '${uuid} has been deleted'`,
+      await this.prisma.orders.delete({
+        where: {
+          order_number: uuid,
+        },
+      }),
+    ).toJSON();
   }
 }

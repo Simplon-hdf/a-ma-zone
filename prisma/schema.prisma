@@ -10,41 +10,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Products {
-  product_UUID        String @id(map: "products_product_uuid") @unique() @default(uuid()) @db.VarChar(36)
-  product_name String @db.VarChar(20)
-  product_description String @db.VarChar(500)
-  product_price Float
-  product_quantity Int
-  created_at DateTime
-  updated_at DateTime
-  orders Belong[]
+model Users {
+  user_UUID     String   @id(map: "users_user_uuid") @unique() @default(uuid()) @db.VarChar(36)
+  user_pseudo   String   @unique() @db.VarChar(30)
+  user_name     String   @unique() @db.VarChar(30)
+  user_password String   @unique() @db.VarChar(72)
+  created_at    DateTime @default(now()) @db.Date()
+  updated_at    DateTime @default(now()) @db.Date()
+  order         Orders[]
 }
 
-model Users {
-  UUID           String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36)
-  user_pseudo    String     @unique() @db.VarChar(20)
-  username       String     @unique() @db.VarChar(30)
-  user_password  String     @unique() @db.VarChar(72)
-  created_at     DateTime   @default(now()) @map("created_at") 
-  orders         Orders[]
+model Products {
+  product_UUID        String   @id(map: "products_product_uuid") @unique() @default(uuid()) @db.VarChar(36)
+  product_name        String   @db.VarChar(20)
+  product_description String   @db.Text()
+  product_price       Float
+  product_quantity    Int
+  created_at          DateTime @default(now()) @db.Date()
+  updated_at          DateTime @default(now()) @db.Date()
+  Belong              Belong[]
 }
 
 model Orders {
-  order_number String @id(map: "orders_order_number") @unique @default(uuid()) @db.VarChar(36)
-  order_total_cost_ht Int
+  order_number Int @id(map: "orders_order_number") @default(autoincrement()) @db.Integer()
+  order_total_cost_ht  Int
   order_total_quantity Int
-  created_at DateTime @default(now())
-  delivrer_at DateTime @default(now())
-  User_UUID String @db.VarChar(36)
-  user Users @relation(fields: [User_UUID], references: [UUID])
-  products Belong[]
+  created_at           DateTime @default(now()) @db.Date()
+  delivrer_at          DateTime @default(now()) @db.Date()
+  user_UUID            String   @db.VarChar(36)
+  user                 Users    @relation(map: "order_user_fk", fields: [user_UUID], references: [user_UUID])
+  Belong               Belong[]
 }
 
 model Belong {
+  order_number Int
   product_UUID String
-  order_number String
-  product Products @relation(fields: [product_UUID], references: [product_UUID])
-  order   Orders   @relation(fields: [order_number], references: [order_number])
+  Order        Orders   @relation(map: "belong_order_number", fields: [order_number], references: [order_number])
+  Product      Products @relation(map: "belong_product_uuid", fields: [product_UUID], references: [product_UUID])
+
   @@id([product_UUID, order_number])
+  @@unique([order_number, product_UUID])
 }
