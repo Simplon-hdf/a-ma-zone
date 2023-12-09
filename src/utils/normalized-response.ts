@@ -1,5 +1,8 @@
 export default class NormalizedResponse {
-  constructor(private readonly message: string, private readonly data: any) {}
+  constructor(
+    private readonly message: string,
+    private readonly data: any,
+  ) {}
 
   public toJSON() {
     return {
