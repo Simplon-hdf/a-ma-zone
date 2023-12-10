@@ -38,12 +38,12 @@ export class CreateProductDto {
   @ApiProperty({
     description: 'This field represents product created_at',
   })
-  @IsDate()
+  @IsDateString()
   public created_at: Date = new Date();
 
   @ApiProperty({
     description: 'This field represents product updated_at',
   })
-  @IsDate()
+  @IsDateString()
   public updated_at: Date = new Date()
 }

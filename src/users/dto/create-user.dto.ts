@@ -32,6 +32,6 @@ export class CreateUserDto {
   @ApiProperty({
     description: 'This field represents the new user created_at',
   })
-  @IsDate()
+  @IsDateString()
   public created_at: Date = new Date();
 }
