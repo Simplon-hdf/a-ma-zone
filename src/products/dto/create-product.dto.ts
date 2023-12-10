@@ -30,21 +30,5 @@ export class CreateProductDto {
     description: 'This field represents product quantity',
   })
   @IsInt()
-<<<<<<< HEAD
-  public quantity: number;
-
-  @ApiProperty({
-    description: 'This field represents product created_at',
-  })
-  @IsDateString()
-  public created_at: Date = new Date();
-
-  @ApiProperty({
-    description: 'This field represents product updated_at',
-  })
-  @IsDateString()
-  public updated_at: Date = new Date()
-=======
   public product_quantity: number;
->>>>>>> c301c49555182a7e64953ca763aed35ae0c84769
 }

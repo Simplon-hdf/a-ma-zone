@@ -27,17 +27,7 @@ export class CreateUserDto {
   })
   @IsString()
   @Length(5, 72)
-<<<<<<< HEAD
-  public password: string;
-
-  @ApiProperty({
-    description: 'This field represents the new user created_at',
-  })
-  @IsDateString()
-  public created_at: Date = new Date();
-=======
   public user_password: string;
->>>>>>> c301c49555182a7e64953ca763aed35ae0c84769
 }
 
 

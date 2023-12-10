@@ -10,10 +10,9 @@ export class OrdersService {
 
   public async create(createOrderDto: CreateOrderDto) {
     return new NormalizedResponse(
-      `Order ${createOrderDto.order_number} has been registered`,
+      `Order ${createOrderDto.order_total_cost_ht} has been registered`,
       await this.prisma.orders.create({
         data: {
-          order_number: createOrderDto.order_number,
           order_total_cost_ht: createOrderDto.order_total_cost_ht,
           order_total_quantity: createOrderDto.order_total_quantity,
           user_UUID : createOrderDto.user_UUID,

@@ -3,13 +3,6 @@ import { IsDate, IsDateString, IsInt, IsNumber, IsString } from 'class-validator
 
 export class CreateOrderDto {
   @ApiProperty({
-    description: 'order_number',
-    maxLength: 36,
-  })
-  @IsString()
-  public order_number: number;
-
-  @ApiProperty({
     description: 'Order order_total_cost_ht',
   })
   @IsInt()
@@ -24,6 +17,6 @@ export class CreateOrderDto {
   @ApiProperty({
     description: 'user_UUID',
   })
-  @IsNumber()
+  @IsString()
   public user_UUID: string;
 }
