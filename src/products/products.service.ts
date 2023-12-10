@@ -14,15 +14,13 @@ export class ProductsService {
 
   public async create(createProductDto: CreateProductDto) {
     return new NormalizedResponse(
-      `Product ${createProductDto.name} has been registered`,
+      `Product ${createProductDto.product_name} has been registered`,
       await this.prisma.products.create({
         data: {
-          product_name: createProductDto.name,
-          product_description: createProductDto.description,
-          product_price: createProductDto.price,
-          product_quantity: createProductDto.quantity,
-          created_at: createProductDto.created_at,
-          updated_at: createProductDto.updated_at,
+          product_name: createProductDto.product_name,
+          product_description: createProductDto.product_description,
+          product_price: createProductDto.product_price,
+          product_quantity: createProductDto.product_quantity
         },
       }),
     ).toJSON();
@@ -76,7 +74,6 @@ export class ProductsService {
           product_description: updateProductDto.description,
           product_price: updateProductDto.price,
           product_quantity: updateProductDto.quantity,
-          updated_at: updateProductDto.updated_at,
         },
       }),
     ).toJSON();

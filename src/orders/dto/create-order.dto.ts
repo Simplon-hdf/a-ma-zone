@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsDateString, IsInt, IsString, Length, Min } from 'class-validator';
+import { IsDate, IsDateString, IsInt, IsNumber, IsString } from 'class-validator';
 
 export class CreateOrderDto {
   @ApiProperty({
@@ -7,7 +7,7 @@ export class CreateOrderDto {
     maxLength: 36,
   })
   @IsString()
-  public order_number: string;
+  public order_number: number;
 
   @ApiProperty({
     description: 'Order order_total_cost_ht',
@@ -22,23 +22,8 @@ export class CreateOrderDto {
   public order_total_quantity: number;
 
   @ApiProperty({
-    description: 'created_at',
-    maxLength: 20
+    description: 'user_UUID',
   })
-  @IsDate()
-  public created_at: Date = new Date();
-
-  @ApiProperty({
-    description: 'delirer_at',
-    maxLength: 20
-  })
-  @IsDate()
-  public delirer_at: Date = new Date();
-
-  @ApiProperty({
-    description: 'User_UUID',
-    maxLength: 36
-  })
-  @IsString()
-  public User_UUID: String;
+  @IsNumber()
+  public user_UUID: string;
 }

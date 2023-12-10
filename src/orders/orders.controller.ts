@@ -28,21 +28,21 @@ export class OrdersController {
   @Get(':uuid')
   public getByUUID(
     @Param('uuid')
-    uuid: string,
+    uuid: number,
   ) {
     return this.ordersService.getByUUID(uuid);
   }
 
   @Patch(':uuid')
   public updateByUUID(
-    @Param('uuid') uuid: string,
+    @Param('uuid') uuid: number,
     @Body() updateOrderDto: UpdateOrderDto,
   ) {
     return this.ordersService.updateByUUID(uuid, updateOrderDto);
   }
 
   @Delete(':uuid')
-  public deleteByUUID(@Param('uuid') uuid: string) {
+  public deleteByUUID(@Param('uuid') uuid: number) {
     return this.ordersService.deleteByUUID(uuid);
   }
 }

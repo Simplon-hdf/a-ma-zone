@@ -10,21 +10,16 @@ export class UsersService {
 
   public async create(createUserDto: CreateUserDto) {
     const createdUser = new NormalizedResponse(
-      `User ${createUserDto.pseudo} has been created`,
+      `User ${createUserDto.user_pseudo} has been created`,
       await this.prisma.users.create({
         data: {
-          user_pseudo: createUserDto.pseudo,
-          username: createUserDto.username,
-          user_password: createUserDto.password,
-          created_at: createUserDto.created_at,
+          user_pseudo: createUserDto.user_pseudo,
+          user_name: createUserDto.user_name,
+          user_password: createUserDto.user_password,
         },
       }),
     );
     return createdUser.toJSON();
-  }
-
-  findAll() {
-    return `This action returns all users`;
   }
 
   public async getByUUID(uuid: string) {
@@ -41,16 +36,15 @@ export class UsersService {
 
   public async updateByUUID(uuid: string, updateUserDto: UpdateUserDto) {
     return new NormalizedResponse(
-      `User ${updateUserDto.pseudo} has been updated`,
+      `User ${updateUserDto.user_pseudo} has been updated`,
       await this.prisma.users.update({
         where: {
           user_UUID: uuid,
         },
         data: {
           user_pseudo: updateUserDto.user_pseudo,
-          username: updateUserDto.username,
+          user_name: updateUserDto.user_name,
           user_password: updateUserDto.user_password,
-          created_at: updateUserDto.created_at,
         }
       })
     ).toJSON();
@@ -66,5 +60,9 @@ export class UsersService {
       }),
     );
     return deletedUser.toJSON();
+  }
+
+  findAll() {
+    return `This action returns all users`;
   }
 }
