@@ -6,10 +6,6 @@ import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductsService {
-  // create(createProductDto: CreateProductDto) {
-  //   return 'This action adds a new product';
-  // }
-
   constructor(private readonly prisma: PrismaService) {}
 
   public async create(createProductDto: CreateProductDto) {
@@ -30,10 +26,6 @@ export class ProductsService {
     return `This action returns all products`;
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} product`;
-  // }
-
   public async getByUUID(uuid: string) {
     return new NormalizedResponse(
       `Product for '${uuid}' uuid has been found`,
@@ -44,23 +36,6 @@ export class ProductsService {
       }),
     ).toJSON();
   }
-
-  // public async getProductsByUserUUID(userUUID: string) {
-  //   return new NormalizedResponse(
-  //     `Products of user '${userUUID}' uuid has been found`,
-  //     await this.prisma.products.findMany({
-  //       where: {
-  //         Author: {
-  //           UUID: userUUID,
-  //         },
-  //       },
-  //     }),
-  //   ).toJSON();
-  // }
-
-  // update(id: number, updateProductDto: UpdateProductDto) {
-  //   return `This action updates a #${id} product`;
-  // }
 
   public async updateByUUID(uuid: string, updateProductDto: UpdateProductDto) {
     return new NormalizedResponse(
@@ -79,26 +54,10 @@ export class ProductsService {
     ).toJSON();
   }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} product`;
-  // }
-
   public async deleteByUUID(uuid: string) {
     return new NormalizedResponse(
       `Product for '${uuid} has been deleted'`,
       await this.prisma.products.delete({ where: { product_UUID: uuid } }),
     ).toJSON();
   }
-
-  // public async deleteProductsByUserUUID(userUUID: string) {
-  //   return new NormalizedResponse(
-  //     `Products for user '${userUUID}' uuid has been deleted`,
-  //     await this.prisma.products.deleteMany({
-  //       where: {
-  //         Author: {
-  //           UUID: userUUID,
-  //         },
-  //       },
-  //     }),
-  //   ).toJSON();
 }
