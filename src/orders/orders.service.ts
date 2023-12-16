@@ -8,27 +8,11 @@ import NormalizedResponse from 'src/utils/normalized-response';
 export class OrdersService {
   constructor(private readonly prisma: PrismaService) { }
 
-  // public async create(createOrderDto: CreateOrderDto) {
-  //   return new NormalizedResponse(
-  //     `Order has been registered`,
-  //     await this.prisma.orders.create({
-  //       data: {
-  //         order_total_cost_ht: createOrderDto.order_total_cost_ht,
-  //         order_total_quantity: createOrderDto.order_total_quantity,
-  //         user_UUID : createOrderDto.user_UUID,
-  //       }
-  //     })
-  //   ).toJSON();
-  // }
-
-
   private async generateForwardDate(daysToAdd: number, from?: Date) {
     const newDate = from ?? new Date();
     newDate.setDate(newDate.getDate() + daysToAdd);
     return newDate;
   }
-  
-
 
   private async getProducts(productUUIDS: string[]) {
     return await this.prisma.products.findMany({
@@ -39,7 +23,6 @@ export class OrdersService {
       },
     });
   }
-
 
   public async create(createOrderDto: CreateOrderDto) {
     const orderedProducts = await this.getProducts(
@@ -80,7 +63,6 @@ export class OrdersService {
       },
     });
   }
-
 
 
   findAll() {
