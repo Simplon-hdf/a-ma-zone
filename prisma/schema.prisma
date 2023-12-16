@@ -36,7 +36,7 @@ model Orders {
   order_total_cost_ht  Int
   order_total_quantity Int
   created_at           DateTime @default(now()) @db.Date()
-  delivrer_at          DateTime @default(now()) @db.Date()
+  deliver_at          DateTime @default(now()) @db.Date()
   user_UUID            String   @db.VarChar(36)
   user                 Users    @relation(map: "order_user_fk", fields: [user_UUID], references: [user_UUID])
   Belong               Belong[]

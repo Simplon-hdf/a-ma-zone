@@ -8,18 +8,80 @@ import NormalizedResponse from 'src/utils/normalized-response';
 export class OrdersService {
   constructor(private readonly prisma: PrismaService) { }
 
-  public async create(createOrderDto: CreateOrderDto) {
-    return new NormalizedResponse(
-      `Order has been registered`,
-      await this.prisma.orders.create({
-        data: {
-          order_total_cost_ht: createOrderDto.order_total_cost_ht,
-          order_total_quantity: createOrderDto.order_total_quantity,
-          user_UUID : createOrderDto.user_UUID,
-        }
-      })
-    ).toJSON();
+  // public async create(createOrderDto: CreateOrderDto) {
+  //   return new NormalizedResponse(
+  //     `Order has been registered`,
+  //     await this.prisma.orders.create({
+  //       data: {
+  //         order_total_cost_ht: createOrderDto.order_total_cost_ht,
+  //         order_total_quantity: createOrderDto.order_total_quantity,
+  //         user_UUID : createOrderDto.user_UUID,
+  //       }
+  //     })
+  //   ).toJSON();
+  // }
+
+
+  private async generateForwardDate(daysToAdd: number, from?: Date) {
+    const newDate = from ?? new Date();
+    newDate.setDate(newDate.getDate() + daysToAdd);
+    return newDate;
   }
+  
+
+
+  private async getProducts(productUUIDS: string[]) {
+    return await this.prisma.products.findMany({
+      where: {
+        OR: productUUIDS.map((product) => ({
+          product_UUID: product,
+        })),
+      },
+    });
+  }
+
+
+  public async create(createOrderDto: CreateOrderDto) {
+    const orderedProducts = await this.getProducts(
+      createOrderDto.products_uuid,
+    );
+
+    const totalCost = orderedProducts
+      .map((product) => product.product_price)
+      .reduce((total, current) => total + current);
+
+    return await this.prisma.orders.create({
+      data: {
+        order_total_cost_ht: totalCost,
+        user: {
+          connect: {
+            user_UUID: createOrderDto.user_UUID,
+          },
+        },
+        Belong: {
+          createMany: {
+            data: orderedProducts.map((product) => ({
+              product_UUID: product.product_UUID,
+            })),
+          },
+        },
+        order_total_quantity: orderedProducts.length,
+        deliver_at: await this.generateForwardDate(7),
+      },
+      select: {
+        order_total_cost_ht: true,
+        user: true,
+        order_total_quantity: true,
+        Belong: {
+          select: {
+            Product: true,
+          },
+        },
+      },
+    });
+  }
+
+
 
   findAll() {
     return `This action returns all users`;

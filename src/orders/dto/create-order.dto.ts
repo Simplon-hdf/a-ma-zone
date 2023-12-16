@@ -14,6 +14,8 @@ export class CreateOrderDto {
   @IsInt()
   public order_total_quantity: number;
 
+  public products_uuid: string[];
+
   @ApiProperty({
     description: 'user_UUID',
   })
