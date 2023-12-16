@@ -38,7 +38,7 @@ export class OrdersService {
         order_total_cost_ht: totalCost,
         user: {
           connect: {
-            user_UUID: createOrderDto.user_UUID,
+            user_UUID: createOrderDto.user_uuid,
           },
         },
         Belong: {
