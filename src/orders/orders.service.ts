@@ -49,7 +49,7 @@ export class OrdersService {
           },
         },
         order_total_quantity: orderedProducts.length,
-        delivrer_at: await this.generateForwardDate(7),
+        deliver_at: await this.generateForwardDate(7),
       },
       select: {
         order_total_cost_ht: true,
