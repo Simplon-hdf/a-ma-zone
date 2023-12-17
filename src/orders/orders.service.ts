@@ -6,7 +6,7 @@ import NormalizedResponse from 'src/utils/normalized-response';
 
 @Injectable()
 export class OrdersService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   private async generateForwardDate(daysToAdd: number, from?: Date) {
     const newDate = from ?? new Date();
@@ -74,9 +74,9 @@ export class OrdersService {
       `Product for '${uuid}' uuid has been found`,
       await this.prisma.orders.findUnique({
         where: {
-          order_number: uuid
-        }
-      })
+          order_number: uuid,
+        },
+      }),
     ).toJSON();
   }
 
@@ -85,14 +85,14 @@ export class OrdersService {
       `Order for '${uuid}' uuid has been updated`,
       await this.prisma.orders.update({
         where: {
-          order_number: uuid
+          order_number: uuid,
         },
         data: {
           order_number: updateOrderDto.order_number,
           order_total_cost_ht: updateOrderDto.order_total_cost_ht,
           order_total_quantity: updateOrderDto.order_total_quantity,
-        }
-      })
+        },
+      }),
     ).toJSON();
   }
 
@@ -101,9 +101,9 @@ export class OrdersService {
       `Orders for '${uuid} has been deleted'`,
       await this.prisma.orders.delete({
         where: {
-          order_number: uuid
-        }
-      })
+          order_number: uuid,
+        },
+      }),
     ).toJSON();
   }
 }
