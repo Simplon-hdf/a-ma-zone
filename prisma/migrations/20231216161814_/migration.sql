@@ -29,7 +29,7 @@ CREATE TABLE "Orders" (
     "order_total_cost_ht" INTEGER NOT NULL,
     "order_total_quantity" INTEGER NOT NULL,
     "created_at" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "delivrer_at" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "deliver_at" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "user_UUID" VARCHAR(36) NOT NULL,
 
     CONSTRAINT "orders_order_number" PRIMARY KEY ("order_number")

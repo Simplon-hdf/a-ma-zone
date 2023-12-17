@@ -12,7 +12,7 @@ datasource db {
 
 model Users {
   user_UUID     String   @id(map: "users_user_uuid") @unique() @default(uuid()) @db.VarChar(36)
-  user_pseudo   String   @unique() @db.VarChar(30)
+  user_pseudo   String   @unique() @db.VarChar(20)
   user_name     String   @unique() @db.VarChar(30)
   user_password String   @unique() @db.VarChar(72)
   created_at    DateTime @default(now()) @db.Date()
@@ -36,7 +36,7 @@ model Orders {
   order_total_cost_ht  Int
   order_total_quantity Int
   created_at           DateTime @default(now()) @db.Date()
-  delivrer_at          DateTime @default(now()) @db.Date()
+  deliver_at          DateTime @default(now()) @db.Date()
   user_UUID            String   @db.VarChar(36)
   user                 Users    @relation(map: "order_user_fk", fields: [user_UUID], references: [user_UUID])
   Belong               Belong[]
